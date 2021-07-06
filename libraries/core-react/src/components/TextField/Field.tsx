@@ -113,7 +113,6 @@ const Unit = styled.span<UnitType>`
 
 type AdornmentsType = {
   multiline: boolean
-  density: string
 }
 
 const Adornments = styled.div<AdornmentsType>`
@@ -125,13 +124,11 @@ const Adornments = styled.div<AdornmentsType>`
   & div:nth-child(2) {
     margin-left: ${textfield.spacings.left};
   }
-  ${({ multiline, density }) =>
+  margin-top: ${({ theme }) => theme.spacings.top};
+
+  ${({ multiline }) =>
     multiline && {
       alignSelf: 'start',
-      marginTop:
-        density === 'compact'
-          ? inputToken.modes.compact.spacings.top
-          : textfield.spacings.top,
     }}
 `
 
@@ -164,8 +161,6 @@ export const Field = forwardRef<
   ref,
 ) {
   const { handleFocus, handleBlur, isFocused } = useTextField()
-  const { density } = useEds()
-
   const actualVariant = variant === 'default' ? 'textfield' : variant
   const inputVariant = tokens[actualVariant]
 
@@ -209,7 +204,7 @@ export const Field = forwardRef<
         />
       )}
       {(inputIcon || unit) && (
-        <Adornments multiline={multiline} density={density}>
+        <Adornments multiline={multiline}>
           {unit && <Unit isDisabled={disabled}>{unit}</Unit>}
           {inputIcon && (
             <Icon isDisabled={disabled} variant={variant}>
