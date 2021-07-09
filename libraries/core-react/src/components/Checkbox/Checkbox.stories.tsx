@@ -6,6 +6,7 @@ import {
   CheckboxProps,
   EdsProvider,
   Table,
+  Tooltip,
 } from '../..'
 import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
@@ -32,7 +33,9 @@ export default {
 } as Meta
 
 export const Default: Story<CheckboxProps> = (args) => (
-  <Checkbox label="Play with me" {...args} />
+  <Tooltip title="test">
+    <Checkbox label="Play with me" {...args} />
+  </Tooltip>
 )
 
 export const SingleCheckbox: Story<CheckboxProps> = () => {
